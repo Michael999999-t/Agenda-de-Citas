@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Scheduler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <h2>Add Worker</h2>
+            <div class="form-group">
+                <input type="text" id="workerName" placeholder="Worker Name">
+                <button onclick="addWorker()">Create Profile</button>
+            </div>
+            <hr>
+            <h3>Available Workers</h3>
+            <ul id="workerList"></ul>
+        </aside>
+
+        <main class="calendar-area">
+            <header class="calendar-controls">
+                <select id="monthSelect" onchange="renderCalendar()"></select>
+                <h2 id="currentMonthDisplay"></h2>
+            </header>
+            
+            <div id="calendarGrid" class="calendar-grid"></div>
+
+            <div id="scheduleModal" class="modal">
+                <div class="modal-content">
+                    <h3>Schedule Shift</h3>
+                    <p id="selectedDateText"></p>
+                    <select id="workerDropdown"></select>
+                    <input type="time" id="startTime" value="09:00">
+                    <input type="time" id="endTime" value="17:00">
+                    <div class="modal-btns">
+                        <button onclick="saveShift()">Save Shift</button>
+                        <button onclick="closeModal()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
