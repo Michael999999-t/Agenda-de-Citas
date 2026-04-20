@@ -7,17 +7,29 @@
     <link rel="stylesheet" href="Agenda de citas.css">
 </head>
 <body>
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <h2>Add Worker</h2>
-            <div class="form-group">
-                <input type="text" id="workerName" placeholder="Worker Name">
-                <button onclick="addWorker()">Create Profile</button>
-            </div>
-            <hr>
-            <h3>Available Workers</h3>
-            <ul id="workerList"></ul>
-        </aside>
+    <div class="main-wrapper animate-fade-in">
+       <aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Add Worker</h2>
+        <div class="form-group">
+            <input type="text" id="workerName" placeholder="Worker Name">
+            <button onclick="addWorker()">Create Profile</button>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #334155; margin: 20px 0;">
+
+    <div class="worker-section">
+        <h3>Available Workers</h3>
+        <ul id="workerList"></ul>
+    </div>
+
+    <div class="sidebar-footer">
+        <button onclick="downloadJSON()" style="background: #475569; margin-top: 20px;">
+            Export Document
+        </button>
+    </div>
+</aside>
 
         <main class="calendar-area">
             <header class="calendar-controls">

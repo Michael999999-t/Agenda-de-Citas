@@ -1,53 +1,108 @@
-/* --- Add these specific styles to your existing CSS --- */
-
-/* Worker List Delete Button */
-#workerList li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+:root {
+    --sidebar-bg: #0f172a;
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+    --bg-main: #f1f5f9;
 }
 
-.del-btn {
-    background: #ef4444 !important;
-    width: 24px !important;
-    height: 24px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    font-size: 14px;
-    line-height: 1;
+/* Base Layout Fix */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-main);
 }
 
-/* Google Calendar Style Bubbles */
-.shift-container {
+.main-wrapper {
+    display: flex; /* Forces Sidebar and Main to be side-by-side */
+    width: 100%;
+    height: 100vh;
+}
+
+/* Sidebar Styling (30%) */
+.sidebar {
+    width: 30%;
+    background-color: var(--sidebar-bg);
+    color: white;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
 }
 
-.shift-tag {
-    background: #0369a1;
-    color: white;
-    font-size: 0.7rem;
-    padding: 4px 10px;
-    border-radius: 20px; /* Pill shape */
-    white-space: nowrap;
+/* Main Area (70%) */
+.calendar-area {
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+/* THE GRID FIX: This makes it look like a calendar */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* FORCES 7 COLUMNS */
+    gap: 12px;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll if there are many weeks */
+}
+
+/* Individual Date Boxes */
+.day-cell {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    min-height: 130px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.day-cell:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.15);
+}
+
+/* Buttons with your Gradient Theme */
+button {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 10px 20px;
     border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: filter 0.2s;
+    transition: all 0.3s ease;
 }
 
-.shift-tag:hover {
-    filter: brightness(1.2);
+button:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
 }
 
-/* Ensure the time inputs look professional */
-input[type="time"] {
-    background: #f8fafc;
-    border: 1px solid var(--border-color);
-    padding: 8px;
-    border-radius: 6px;
+/* Modal styling to keep it hidden */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
     width: 100%;
-    margin-top: 5px;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 400px;
+    text-align: center;
 }
