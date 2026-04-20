@@ -1,9 +1,8 @@
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let workers = [];
-let schedules = {}; // Key: "month-day", Value: Array of shifts
+let schedules = {}; 
 let selectedDay = null;
 
-// Initialize
 window.onload = () => {
     const selector = document.getElementById('monthSelect');
     months.forEach((m, i) => {
@@ -17,11 +16,16 @@ window.onload = () => {
 };
 
 function addWorker() {
-    const name = document.getElementById('workerName').value;
+    const name = document.getElementById('workerName').value.trim();
     if (!name) return;
     workers.push(name);
     updateWorkerUI();
     document.getElementById('workerName').value = '';
+}
+
+function deleteWorker(index) {
+    workers.splice(index, 1);
+    updateWorkerUI();
 }
 
 function updateWorkerUI() {
@@ -30,9 +34,12 @@ function updateWorkerUI() {
     list.innerHTML = "";
     dropdown.innerHTML = "";
     
-    workers.forEach(w => {
+    workers.forEach((w, index) => {
         let li = document.createElement('li');
-        li.textContent = w;
+        li.innerHTML = `
+            <span>${w}</span>
+            <button class="del-btn" onclick="deleteWorker(${index})">×</button>
+        `;
         list.appendChild(li);
         
         let opt = document.createElement('option');
@@ -44,7 +51,7 @@ function updateWorkerUI() {
 
 function renderCalendar() {
     const monthIndex = parseInt(document.getElementById('monthSelect').value);
-    const year = 2026; // Current year
+    const year = 2026; 
     const grid = document.getElementById('calendarGrid');
     const display = document.getElementById('currentMonthDisplay');
     
@@ -56,25 +63,29 @@ function renderCalendar() {
     for (let i = 1; i <= daysInMonth; i++) {
         const cell = document.createElement('div');
         cell.className = 'day-cell';
-        cell.onclick = () => openModal(i);
+        cell.onclick = (e) => {
+            if(e.target.className !== 'shift-tag') openModal(i);
+        };
         
         const dateKey = `${monthIndex}-${i}`;
-        let shiftsHtml = (schedules[dateKey] || []).map(s => 
-            `<div class="shift-tag">${s.name}: ${s.start}-${s.end}</div>`
+        let shiftsHtml = (schedules[dateKey] || []).map((s, shiftIdx) => 
+            `<div class="shift-tag" onclick="removeShift('${dateKey}', ${shiftIdx})">
+                ${s.name} (${s.start}-${s.end})
+            </div>`
         ).join('');
 
-        cell.innerHTML = `<div class="day-header">${i}</div>${shiftsHtml}`;
+        cell.innerHTML = `<div class="day-header">${i}</div><div class="shift-container">${shiftsHtml}</div>`;
         grid.appendChild(cell);
     }
 }
 
 function openModal(day) {
     if (workers.length === 0) {
-        alert("Add a worker first!");
+        alert("Please add a worker in the sidebar first.");
         return;
     }
     selectedDay = day;
-    document.getElementById('selectedDateText').innerText = `Date: ${months[document.getElementById('monthSelect').value]} ${day}`;
+    document.getElementById('selectedDateText').innerText = `Schedule for Day ${day}`;
     document.getElementById('scheduleModal').style.display = 'block';
 }
 
@@ -93,5 +104,10 @@ function saveShift() {
     schedules[key].push({ name, start, end });
 
     closeModal();
+    renderCalendar();
+}
+
+function removeShift(key, index) {
+    schedules[key].splice(index, 1);
     renderCalendar();
 }

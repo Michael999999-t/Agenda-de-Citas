@@ -1,191 +1,53 @@
-/* Professional Palette & Variables */
-:root {
-    --sidebar-bg: #1e293b;
-    --sidebar-text: #f8fafc;
-    --accent-color: #3b82f6;
-    --success-color: #10b981;
-    --bg-main: #f1f5f9;
-    --border-color: #e2e8f0;
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+/* --- Add these specific styles to your existing CSS --- */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg-main);
-    color: #1e293b;
-    height: 100vh;
-    overflow: hidden; /* Prevents double scrollbars */
-}
-
-.main-wrapper {
-    display: flex;
-    height: 100vh;
-}
-
-/* --- Sidebar (30%) --- */
-.sidebar {
-    width: 30%;
-    background-color: var(--sidebar-bg);
-    color: var(--sidebar-text);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
-    z-index: 10;
-}
-
-.sidebar h2, .sidebar h3 {
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #334155;
-    background: #334155;
-    color: white;
-    margin-bottom: 1rem;
-    transition: border 0.2s;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
-.sidebar button {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.1s, background 0.2s;
-}
-
-.sidebar button:hover {
-    background-color: #2563eb;
-}
-
-#workerList {
-    list-style: none;
-    margin-top: 1rem;
-    overflow-y: auto;
-}
-
+/* Worker List Delete Button */
 #workerList li {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 10px 15px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    border-left: 3px solid var(--accent-color);
-}
-
-/* --- Calendar Area (70%) --- */
-.calendar-area {
-    width: 70%;
-    padding: 2rem;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.calendar-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
 }
 
-#monthSelect {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background: white;
-    font-weight: 500;
-    cursor: pointer;
+.del-btn {
+    background: #ef4444 !important;
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 14px;
+    line-height: 1;
 }
 
-/* Grid Layout */
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 12px;
-    flex-grow: 1;
-}
-
-.day-cell {
-    background: white;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    padding: 12px;
-    min-height: 120px;
-    transition: box-shadow 0.2s, transform 0.2s;
-    box-shadow: var(--card-shadow);
-}
-
-.day-cell:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-.day-header {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #64748b;
-    margin-bottom: 8px;
-}
-
-/* Shifts inside the calendar */
-.shift-tag {
-    background: #e0f2fe;
-    color: #0369a1;
-    font-size: 0.7rem;
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin-top: 5px;
-    border: 1px solid #bae6fd;
-    font-weight: 500;
-}
-
-/* --- Modal Styling --- */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 100;
-}
-
-.modal-content {
-    background: white;
-    width: 380px;
-    margin: 10vh auto;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.modal-content h3 { margin-bottom: 1rem; }
-
-.modal-btns {
+/* Google Calendar Style Bubbles */
+.shift-container {
     display: flex;
-    gap: 10px;
-    margin-top: 1.5rem;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.modal-btns button:first-child { background: var(--success-color); }
-.modal-btns button:last-child { background: #ef4444; }
+.shift-tag {
+    background: #0369a1;
+    color: white;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 20px; /* Pill shape */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.shift-tag:hover {
+    filter: brightness(1.2);
+}
+
+/* Ensure the time inputs look professional */
+input[type="time"] {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    border-radius: 6px;
+    width: 100%;
+    margin-top: 5px;
+}
