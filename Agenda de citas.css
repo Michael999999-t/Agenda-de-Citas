@@ -1,108 +1,141 @@
+/* --- CLEAN THEME WITH BLACK SIDEBAR --- */
 :root {
-    --sidebar-bg: #0f172a;
+    --bg-main: #ffffff;           /* Pure white calendar background */
+    --sidebar-bg: #000000;        /* SOLID BLACK SIDEBAR */
     --accent-gradient: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
-    --bg-main: #f1f5f9;
+    --text-light: #ffffff;        /* White text for the sidebar */
+    --text-dark: #1e293b;         /* Dark text for the calendar */
+    --border-light: #e2e8f0;
+    --shadow-accent: rgba(37, 99, 235, 0.3);
 }
 
-/* Base Layout Fix */
-body, html {
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in { 
+    animation: fadeInUp 0.8s ease-out forwards; 
+}
+
+/* --- GLOBAL STYLES --- */
+body {
     margin: 0;
-    padding: 0;
-    height: 100%;
     font-family: 'Inter', sans-serif;
-    background: var(--bg-main);
-}
-
-.main-wrapper {
-    display: flex; /* Forces Sidebar and Main to be side-by-side */
-    width: 100%;
-    height: 100vh;
-}
-
-/* Sidebar Styling (30%) */
-.sidebar {
-    width: 30%;
-    background-color: var(--sidebar-bg);
-    color: white;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
-}
-
-/* Main Area (70%) */
-.calendar-area {
-    width: 70%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
     overflow: hidden;
 }
 
-/* THE GRID FIX: This makes it look like a calendar */
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* FORCES 7 COLUMNS */
-    gap: 12px;
-    padding: 20px;
-    flex-grow: 1;
-    overflow-y: auto; /* Scroll if there are many weeks */
+.main-wrapper {
+    display: flex;
+    height: 100vh;
 }
 
-/* Individual Date Boxes */
-.day-cell {
-    background: white;
+/* --- THE BLACK SIDEBAR --- */
+.sidebar {
+    width: 30%;
+    background-color: var(--sidebar-bg);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-light); /* Forces text inside to be white */
+}
+
+.sidebar h2, .sidebar h3 {
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+/* --- BUTTONS (High-Energy Gradient) --- */
+button, .btn-start {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
     border-radius: 12px;
-    padding: 12px;
-    min-height: 130px;
-    border: 1px solid #e2e8f0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 15px -3px var(--shadow-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.4);
+    filter: brightness(1.1);
+}
+
+/* --- CALENDAR GRID (7 Columns) --- */
+.calendar-area {
+    width: 70%;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
 }
 
-.day-cell:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.15);
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
-/* Buttons with your Gradient Theme */
-button {
+/* Day Cells (White with Hover Lift) */
+.day-cell {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.25rem;
+    min-height: 140px;
+    border: 1px solid var(--border-light);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.day-cell:hover {
+    transform: translateY(-10px); /* Feature-card lift */
+    border-color: #2563eb;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.day-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- INPUTS (Inside Black Sidebar) --- */
+.sidebar input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    background: #1a1a1a; /* Darker gray so it's visible on black */
+    border: 1px solid #333;
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.sidebar input:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+/* --- SHIFT TAGS (Gradient Bubbles) --- */
+.shift-tag {
     background: var(--accent-gradient);
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.75rem;
     font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    transform: scale(1.03);
-    filter: brightness(1.1);
-}
-
-/* Modal styling to keep it hidden */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-}
-
-.modal-content {
-    background: white;
-    margin: 10% auto;
-    padding: 30px;
-    border-radius: 20px;
-    width: 400px;
-    text-align: center;
+    margin-top: 10px;
 }
