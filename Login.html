@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ShiftFlow</title>
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+    <div class="login-container animate-fade-in">
+        <div class="login-card">
+            <h1>ShiftFlow</h1>
+            <p>Access your worker management portal</p>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="name@company.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-start">Login</button>
+            </form>
+            
+            <div class="footer-links">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            // Simulate a successful login
+            const btn = event.target.querySelector('button');
+            btn.innerText = "Authenticating...";
+            
+            setTimeout(() => {
+                // Redirect to your calendar page (adjust filename if needed)
+                window.location.href = "Agenda de citas.html";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
